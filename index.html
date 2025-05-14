@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Tebak Warna</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f9f9f9;
+      font-family: Arial, sans-serif;
+    }
+    header {
+      background-color: #28a745;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+    }
+    .container {
+      margin-top: 40px;
+    }
+    .game-box {
+      padding: 30px;
+      border-radius: 10px;
+      background-color: #ffffff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .color-box {
+      width: 100px;
+      height: 100px;
+      margin: 20px auto;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Game Tebak Warna</h1>
+  </header>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8 game-box">
+        <section id="about">
+          <h2>About</h2>
+          <p>Game ini dibuat untuk melatih pengenalan warna dengan cara menebak nama warna dari kotak berwarna yang muncul secara acak.</p>
+        </section>
+
+        <section id="play">
+          <h2>Play</h2>
+          <p>Lihat warna pada kotak dan masukkan nama warna (dalam Bahasa Inggris), lalu klik "Tebak".</p>
+          <div class="color-box" id="colorBox"></div>
+          <div class="input-group mb-3">
+            <input type="text" id="colorGuess" class="form-control" placeholder="Tebak nama warna (contoh: red)">
+            <button class="btn btn-success" onclick="checkColor()">Tebak</button>
+          </div>
+          <p id="result"></p>
+        </section>
+
+        <section id="how">
+          <h2>How to Play</h2>
+          <p>Warna acak ditampilkan di layar. Anda harus mengetikkan nama warna dalam Bahasa Inggris yang sesuai dengan warna tersebut.</p>
+        </section>
+
+        <section id="credit">
+          <h2>Credit</h2>
+          <p>Dibuat oleh: Keysha Fira Maenda</p>
+        </section>
+
+        <section id="other">
+          <h2>Catatan</h2>
+          <p>Game ini bisa dikembangkan dengan timer, skor, atau level kesulitan berdasarkan nuansa warna.</p>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const colors = ["red", "blue", "green", "yellow", "orange", "purple", "pink", "brown"];
+    let currentColor = "";
+
+    function setRandomColor() {
+      currentColor = colors[Math.floor(Math.random() * colors.length)];
+      document.getElementById("colorBox").style.backgroundColor = currentColor;
+    }
+
+    function checkColor() {
+      const guess = document.getElementById("colorGuess").value.toLowerCase();
+      const result = document.getElementById("result");
+
+      if (guess === currentColor) {
+        result.textContent = "Tebakan benar!";
+        result.style.color = "green";
+      } else {
+        result.textContent = `Salah! Warna sebenarnya adalah ${currentColor}.`;
+        result.style.color = "red";
+      }
+      setRandomColor();
+    }
+
+    window.onload = setRandomColor;
+  </script>
+</body>
+</html>
